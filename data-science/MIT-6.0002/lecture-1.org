@@ -1,1 +1,29 @@
-Lecture 1:
+Terminology:
+- power set - a set of all possible subsets (combinations) of a set  fsS
+Lecture 1 -  optimization problems :
+- models are mathematical devices that help us understand what has and will happen
+Optimization models:
+- has:
+  an opbjective function that is to be minimized or maximized
+  a set of constaints that must be honoured
+
+  Optimization problems:
+
+  - knap sack problem:
+
+    - continuous:
+      - fill highest value in knapsack till depleted then proceeded with next highest value item.
+      - example of greedy solution to a greedy problem that finds the global maxima
+
+    - discrete:
+      - objective function:
+
+    - brute force solution with correctness is n!
+    - knap sack and other opti problems are exponential:
+      - no solution exists that provides an exact solution that is not exponential time complex.
+
+    - solution? Heuristic based algorithms such as greedy algorithms
+      - eg?
+         while bag not full and item available:
+            add `best item to back pack
+        - best item is determined through a heuristic function
