@@ -1,0 +1,115 @@
+* What are Microservices?
+  - Small, *independently releasable* services modeled around a business domain.
+  - Each microservice exposes its *functionality, data, and state* via network communication.
+  - Should be treated like an *object in OOP*, with *high encapsulation* and communication via *well-defined interfaces*.
+  - *Each microservice should:*
+    - Have its *own state* managed through a *separate database* (encapsulation).
+    - Restrict state modifications to *itself only* (no external direct changes).
+    - Hide its *implementation details* from consumers.
+  - *Key goals:*
+    - *Loose coupling & strong cohesion* between services.
+    - Focus on *one aspect* of the business domain.
+    - Ensure *independent deployability* as a guiding principle.
+  - *Microservices are a specialized subset* of *Service-Oriented Architecture (SOA)*, with *opinionated service boundaries*.
+
+* Hiding Internal Implementation
+  - Use the *Hexagonal Architecture* pattern.
+  - Separate *internal implementation* from *external interfaces* to support multiple interface types.
+
+* Microservices vs. Service-Oriented Architecture (SOA)
+  - *SOA*: A design approach where multiple services collaborate to provide capabilities.
+    - Each service is typically a *separate OS process*.
+    - Services communicate via *network calls* (not direct method calls).
+    - Services can be *rewritten or changed* as long as their semantics remain stable.
+  - *Microservices*: A *specific implementation* of SOA with stricter *service boundaries and independence*.
+
+* Key Concepts of Microservices
+** Independent Deployability
+   - A change to one microservice *should not* require changes to others.
+   - Services should be *loosely coupled* with *explicit, stable contracts*.
+   - *Treat independent deployability as a forcing function* to:
+     - Define *microservice boundaries*.
+     - Maintain *loose coupling* and *stable contracts*.
+   - *Backward-incompatible changes* should be minimized.
+
+** Business Domain-Driven Design
+   - *Use Domain-Driven Design (DDD)* to define *service boundaries*.
+     - Each service represents a *real-world domain*.
+     - Allows easy composition of services for *new functionality*.
+   - *Why clear boundaries matter:*
+     - Rolling out changes across multiple services is *expensive*.
+     - Minimize *cross-service changes* to keep updates efficient.
+   - *Microservices prioritize:*
+     - *High cohesion of business functionality* over high cohesion of technical functions.
+
+** Owning Their Own State
+   - *Avoid shared databases* to prevent *shared state issues*.
+   - Each service should have *its own database*.
+   - Other services *should not access* another service’s database directly.
+     - Example: If an *Order Service* needs *Payment Information*, it must *request it via an API*, not query the Payment Service’s database. - *Encapsulation analogy*: Just like OOP, microservices encapsulate *interfaces, business logic, and data*. ** Size Considerations - *Size is secondary*; focus on *business domains* first. - A microservice should be *small enough* to be: - *Easily understood*. - Have *a minimal external interface*.
+* What are Microservices?
+** Definition
+- They are small, independently releasable services that are modeled around a business domain.
+- Each microservice should offer access to its functionality, data, and state via networks.
+- Each service should be treated as an autonomous component, similar to objects in OOP, ensuring high encapsulation and communication through well-defined interfaces.
+- Strong separation of domains:
+  - Each microservice should have its own state through a separate database (encapsulation).
+  - State should only be directly changed by itself and not externally.
+  - Implementation details should be hidden from consumers of the service.
+- End goal: *loose coupling and strong cohesion*.
+- A microservice should focus on *one* aspect of the business domain.
+- It is a specialized subset of *opinionated approaches to Service-Oriented Architecture (SOA)*.
+  - It is opinionated in defining service boundaries.
+- A well-defined microservice should be *independently deployable*.
+- Ensure *independent deployability* as a guiding principle.
+
+* Hiding Internal Implementation
+- Use *Hexagonal Architecture pattern
+- Keep internal implementation separate from its external interfaces.
+  - This ensures consumers interact with a stable API while implementation details remain hidden.
+- A microservice may need *multiple interfaces* to serve different clients (e.g., REST for external consumers, gRPC for internal services).
+
+* Are Microservices Different from Service-Oriented Architectures (SOA)?
+- *SOA* is a design approach where multiple services collaborate to provide capabilities.
+  - Each service is often a separate process but may not always be an independently deployable unit.
+- Communication between services is done via *network calls rather than method calls*.
+- SOA allows the ability to rewrite or change each service as long as the semantics remain stable.
+- *Microservices are a specific implementation of SOA*, emphasizing *smaller, independently deployable services*.
+
+* Key Concepts of Microservices
+** Independent Deployability
+- A change to a microservice should *not require changes to other microservices*.
+- Each microservice should be *loosely coupled*.
+- There should be *explicit, well-defined, and stable contracts* between services.
+- *Treat independent deployability as a forcing function to get things right.*
+  - Use this as a guideline to define microservice boundaries.
+- *Backward-incompatible changes should be limited.*
+
+** Each Service Modeled Around a Business Domain
+- Use *Domain-Driven Design (DDD)* to define service boundaries.
+  - Each service should represent a *real-world domain*.
+- This allows flexible composition of services to deliver new functionality.
+- *Why clear boundaries matter:*
+  - Rolling out changes across multiple services is *expensive*.
+  - Clear service boundaries minimize dependencies.
+- *Microservices prioritize business functionality cohesion over technical cohesion.*
+  - Services should be designed as *end-to-end business slices(vertical slice)*, not as layers.
+    - Instead of separate "Auth Service", "User Profile Service", and "Billing Service", a "Customer Management Service" could handle all customer-related functions, reducing cross-service dependencies.
+
+** Owning Their Own State
+- *Shared databases should be avoided* to prevent shared state issues.
+- Each service should own its own *database* or *state*.
+- No direct access to other service databases.
+- If an *Order Service* needs payment info, it should *request it via an API* instead of querying the Payment Service’s database directly.
+- This is analogous to *encapsulation in OOP*, where business logic and data are hidden behind interfaces.
+
+** Communication Strategies
+- Services communicate via *network calls*:
+  - *Synchronous:* REST, gRPC.
+  - *Asynchronous:* Event-driven systems (Kafka, RabbitMQ).
+- *Prefer asynchronous messaging* for scalability and resilience.
+
+* Size Considerations
+- **Don’t over-optimize for size**; focus on the *business domain*.
+- The goal is to have *small, well-defined interfaces* that are easily understandable.
+- Services should be small enough to *minimize dependencies* but large enough to *provide meaningful business functionality*.
